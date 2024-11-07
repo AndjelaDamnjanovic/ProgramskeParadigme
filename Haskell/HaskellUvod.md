@@ -40,7 +40,7 @@ Ukoliko bismo, pak, hteli da na standardni izlaz ispišemo više teksta koji se 
 Prilikom pisanja funkcija, nije obavezno prethodno ih deklarisati, jer je Haskell veoma pametan jezik i na osnovu operacija koje se vrše nad argumentima može da zaključi kog su tipa argumenti, ali i rezultat. Ukoliko operaciju koja je korišćena u definiciji funkcije implementira više tipskih razreda, onda će Haskell zaključiti da argumenti pripadaju najopštiji tipski razred. 
 
 Na primer, ukoliko definišemo funkciju `zbir a b = a + b` bez prethodnog deklarisanja i pokrenemo komandu `:i zbir`  (informacije o ovoj komandi navededene su u [ovoj sekciji](#Pokretanje-interpretera)
-) u interpreteru dobićemo sledeće podatke o funkciji: [](src/info.png) . Sa leve strane `=>` nalazi se ograničenje, tj. vidimo da je interpreter na osnovu operacija koje smo koristili u definiciji (sabiranje) zaključio najširi mogući tipski razred koji implementira tu funkciju (u ovom slučaju `Num`). Sa desne strane znaka `=>` nalaze se redom tipovi argumentaata i tipovi povratne vrednosti razdvojeni `->`.  Dakle, cela linija koju smo dobili kao povratnu informaciju o tipu može se protumačiti na sledeći način: "funkcija `zbir` prima dva argumenta tipa koji pripada tipskom razredu `Num` i vraća vrednost koja pripada istom tipu".
+) u interpreteru dobićemo sledeće podatke o funkciji: ![Informacije koje je interpreter zaključio](src/info.png) . Sa leve strane `=>` nalazi se ograničenje, tj. vidimo da je interpreter na osnovu operacija koje smo koristili u definiciji (sabiranje) zaključio najširi mogući tipski razred koji implementira tu funkciju (u ovom slučaju `Num`). Sa desne strane znaka `=>` nalaze se redom tipovi argumentaata i tipovi povratne vrednosti razdvojeni `->`.  Dakle, cela linija koju smo dobili kao povratnu informaciju o tipu može se protumačiti na sledeći način: "funkcija `zbir` prima dva argumenta tipa koji pripada tipskom razredu `Num` i vraća vrednost koja pripada istom tipu".
 
 Sa druge strane, moguće je i ručno deklarisanje funkcije, što je i preporučljivo iz sledećih razloga:
 
@@ -66,7 +66,7 @@ Pokretanje kompilatora vrši se iz terminala komandom <b>`ghc ime_izvornog_fajla
 
 Za razliku od kompajlera, interpreter <b>ne zahteva</b> postojanje funkcije `main` da bi kod mogao da se interpretira.  Standardni koraci prilikom korišćenja interpretera podrazumevaju najpre pisanje funkcije, a onda i njeno interpretiranje u cilju testiranja. 
 
-Interpreter se takođe pokreće iz terminala, komandom `ghci`.  Nakon inicijalnog pokretanja interpretera, dobijamo sledeću poruku: [Poruka pri pokretanju interpretera](src/info.png).
+Interpreter se takođe pokreće iz terminala, komandom `ghci`.  Nakon inicijalnog pokretanja interpretera, dobijamo sledeću poruku: ![Poruka pri pokretanju interpretera](src/info.png).
 Sve komande za interpreter počinju dvotačkom (`:`).  Neke od najkorisnijih naredbi su:
 
 - `:l ime_fajla` (ili `:load ime_fajla`) : omogućava učitavanje fajla (ili više njih) u interpreter 
@@ -74,7 +74,7 @@ Sve komande za interpreter počinju dvotačkom (`:`).  Neke od najkorisnijih nar
 - `:i ime_funkcije/ime_tipa/ime_tipskog_razreda` (ili `:info ime_funkcije/ime_tipa/ime_tipskog_razreda`) : omogućava dobijanje informacija o funkciji/tipu/tipskom razredu i
 - `:h` (ili `:help`) : izlistava sve moguće komande koje se mogu zadati interpreteru. 
 
-Ukoliko se fajl ispravno učitao, dobijamo poruku o tome da je modul učitan [Izgled terminala prilikom uspešnog učitavanja modula](src/uspeh.png). U suprotnom, dobijamo poruku koja sadrži inforamcije o grešci zbog koje fajl nije mogao biti učitan [Izgled terminala prilikom neuspešnog učitavanja modula i poruka o grešci](src/greska.png).
+Ukoliko se fajl ispravno učitao, dobijamo poruku o tome da je modul učitan ![Izgled terminala prilikom uspešnog učitavanja modula](src/uspeh.png). U suprotnom, dobijamo poruku koja sadrži inforamcije o grešci zbog koje fajl nije mogao biti učitan ![Izgled terminala prilikom neuspešnog učitavanja modula i poruka o grešci](src/greska.png).
 
 Nakon uspešnog učitavanja fajla u interpreter, možemo pozivati funkcije koje su definisane u tom fajlu (ali naravno i one ugrađene) komandom `ime_funkcije arg1 arg2 ... argn`, gde su sa `arg` obeleženi argumenti koji se prosleđuju funkciji. Interpreter izvršava naznačenu funkciju i vraća njenu povratnu vrednost ukoliko se funkcija ispravno izvršila ili poruku o grešci/upozorenje ukoliko postoji problem pri izvršavanju funkcije (pozivamo funkciju sa argumentima koji nisu odgovarajućeg tipa, ako argumenata ima više/manje nego što funkcija očekuje, ako ponašanje funkcije nije definisano za neke posebne slučajeve kao što je prazna lista...). 
 
