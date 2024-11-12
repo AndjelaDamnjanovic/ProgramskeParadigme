@@ -72,7 +72,10 @@ Sve komande za interpreter počinju dvotačkom (`:`).  Neke od najkorisnijih nar
 - `:l ime_fajla` (ili `:load ime_fajla`) : omogućava učitavanje fajla (ili više njih) u interpreter 
 - `:r` (ili `:reload`) : omogućava ponovno učitavanje svih fajlova koji su u bili učitani u interpreter tokom tekuće sesije (ova opcija je korisna jer se fajl mora interpretirati nakon svake unete izmene)
 - `:i ime_funkcije/ime_tipa/ime_tipskog_razreda` (ili `:info ime_funkcije/ime_tipa/ime_tipskog_razreda`) : omogućava dobijanje informacija o funkciji/tipu/tipskom razredu i
-- `:h` (ili `:help`) : izlistava sve moguće komande koje se mogu zadati interpreteru. 
+- `:h` (ili `:help`) : izlistava sve moguće komande koje se mogu zadati interpreteru.
+- `:t funkcija` (ili `:type funkcija`) : ispisuje potpis tražene funkcije (ugrađene ili korisnički definisane)
+- `:doc tip/ime_fje` (ili `:documentation tip/ime_fje`) : ispisuje dokumentaciju vezanu za tip/funkciju
+- `:q` (ili `:quit`) : izlaz iz interpretera
 
 Ukoliko se fajl ispravno učitao, dobijamo poruku o tome da je modul učitan ![Izgled terminala prilikom uspešnog učitavanja modula](src/uspeh.png). U suprotnom, dobijamo poruku koja sadrži inforamcije o grešci zbog koje fajl nije mogao biti učitan ![Izgled terminala prilikom neuspešnog učitavanja modula i poruka o grešci](src/greska.png).
 
