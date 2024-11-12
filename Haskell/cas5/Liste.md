@@ -51,6 +51,7 @@ Neke od najbitnijih funkcija koje olakšavaju rad sa  listama <b>proizvoljnog ti
 - odstranjivanje prvih `n` elemenata s početka liste: `drop 4 [1..10]`
 - obrtanje liste: `reverse [1..10]`
 - pravljenje liste od `n` istih elemenata: `replicate 3 [1..10]` 
+- provera da li je lista prazna: `null [1..10]`
 
 
 
