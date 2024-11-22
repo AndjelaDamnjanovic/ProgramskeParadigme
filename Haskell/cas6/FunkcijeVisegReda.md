@@ -11,12 +11,12 @@ Kao i u Pajtonu, i u programskom jeziku Haskel dostupna je ugrađena funkcija `m
 Funkcija `map` funkcioniše isto kao i u Pajtonu. Ona primenjuje prosleđenu funkciju na svaki element liste i kao rezultat vraća listu rezultujućih elemenata. Neka je `f` funkcija koju želimo da primenimo na sve elemente liste, a `x1, x2,..., xn` elementi te liste. Slikovito, funkcija map radi na sledeći način:
 
     map f [x1, x2, x3, ..., xn] = [f x1, f x2, ..., f xn]
-    (ubaci mozda jos neku sliku) 
+
 Tako, na primer, ukoliko bismo želeli da uvećamo sve elemente liste za 1, to bismo mogli da uradimo na sledeći način:
  `uvecaj lista = map (+1) lista`,  gde je `(+1)` ugrađena funkcija za sabiranje kojoj je jedan element fiksiran (i to drugi u ovom slučaju). Fiksiranje elemenata moguće je zbog <b>karijevanja</b>.  Slično, ukoliko bismo želeli da izvadimo koren iz svih elemenata liste, to bi takođe bilo moguće korišćenjem funkcije 
  `koren lista = map sqrt lista`. 
 
-Naravno, funkciji `map` se ne moraju proslediti samo ugrađene funkcije, već je moguće proslediti i korisnički definisane funkcije. Na primer, ako ne bismo u prvom primeru želeli da mi napišemo svoju funkciju koja će da uvećava elemente i da nju kasnije prosledimo funkciji `map`, to bi se moglo uraditi na sledeći način:
+Naravno, funkciji `map` se ne moraju proslediti samo ugrađene funkcije, već je moguće proslediti i korisnički definisane funkcije. Na primer, ako bismo u prvom primeru želeli da mi napišemo svoju funkciju koja će da uvećava elemente i da nju kasnije prosledimo funkciji `map`, to bi se moglo uraditi na sledeći način:
  
 
     uvecaj1 n = n + 1
@@ -76,7 +76,7 @@ Funkcija slična funkciji `foldr`, a koja takođe odgovara funkciji `reduce` iz 
 `saberi [4 : []] = ((((0 + 1) + 2) + 3) + 4) + saberi []`.
 
 <b>Napomena: paziti pri korišćenju funkcija `foldr` i  `foldl` jer za nekomutativne operacije ne dobijaju se isti rezultati, pa je veoma bitno koja se od ove dve funkcije foristi!</b>
- (slika primer)
+[Primer razlike rezultata izvršavanja foldr i foldl funkcije](../src/folds.png)
 
 # Takewhile i dropWhile
 
