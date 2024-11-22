@@ -76,7 +76,7 @@ Funkcija slična funkciji `foldr`, a koja takođe odgovara funkciji `reduce` iz 
 `saberi [4 : []] = ((((0 + 1) + 2) + 3) + 4) + saberi []`.
 
 <b>Napomena: paziti pri korišćenju funkcija `foldr` i  `foldl` jer za nekomutativne operacije ne dobijaju se isti rezultati, pa je veoma bitno koja se od ove dve funkcije foristi!</b>
-[Primer razlike rezultata izvršavanja foldr i foldl funkcije](../src/folds.png)
+![Primer razlike rezultata izvršavanja foldr i foldl funkcije](../src/folds.png)
 
 # Takewhile i dropWhile
 
