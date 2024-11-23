@@ -3,7 +3,7 @@
 --segmentu [c, d].
 
 
--- kada element liste sadrzi vise elemenata, potrebno je za svaki
+-- kada element liste sadrzi vise vrednosti, potrebno je za svaku
 -- navesti domen
 
 

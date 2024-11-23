@@ -5,5 +5,5 @@ sumaKvadrata :: Int -> Int
 sumaKvadrata n = if n == 1 then 1
                  else n*n + sumaKvadrata (n-1)
 
--- Takodje, ukoliko zelimo stepen negkog broja, mozemo to napisati
+-- Takodje, ukoliko zelimo stepen nekog broja, mozemo to napisati
 -- kao x^n, gde je n zeljeni stepen

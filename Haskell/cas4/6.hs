@@ -29,4 +29,4 @@
 -- zagrada navede tip elemenata. Svi elementi liste MORAJU biti istog
 -- tipa
 lista :: Int -> Int -> [Int]
-lista a b = if a < b then [a..b] else []
+lista a b = if a <= b then [a..b] else []

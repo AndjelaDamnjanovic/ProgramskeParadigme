@@ -8,3 +8,5 @@ list_elem x l
  | otherwise = list_elem x (tail l)
 
 list_elem' x l = (or.map (== x)) l
+
+list_elem'' x l = any (== x) l

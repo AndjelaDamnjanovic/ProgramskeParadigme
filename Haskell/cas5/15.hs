@@ -3,7 +3,7 @@
 
 
 -- ovaj zadatak sada mozemo uraditi i na laksi nacin koriscenjem list
--- geenratora
+-- generatora
 
 delioci :: Int -> [Int]
 delioci n = [x | x <- [2.. (div n 2)], mod n x == 0]

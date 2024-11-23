@@ -4,7 +4,7 @@
 
 # Map
 
-Kao i u Pajtonu, i u programskom jeziku Haskel dostupna je ugrađena funkcija `map`. Njen potpis možemo dobiti pozivanjem `:i map` iz interpretera i on izgleda ovako: `map :: (a -> b) -> [a] -> [b]`. Pre prelaska na objašnjenje šta i kako funkcija `map` radi, potrebno je reći zbog čega uopšte postoje zagrade u zapisu. Setimo se da ukoliko ovih zagrada ne bi bilo bismo potpis funkcije tumačili kao "funkcija map prima argument tipa `a`, argument tipa `b`, listu elemenata tipa `a` i vraća listu elemenata tipa `b`".  No, zagrade menjaju značenje potpisa. Ukoliko sada izdvojimo samo segment u zagradama `(a -> b)` i posmatramo ga nezavisno od ostatka potpisa, možemo uočiti da se on sam za sebe može tumačiti kao funkcija i to kao funkcija koja prima argument tipa `a` i vraća rezultat tipa `b`. Dakle, <b>ukoliko se funkciji kao argument prosleđuje druga funkcija, to se radi tako što se potpis prosleđene funkcije piše u zagradama</b>. Takođe, kao što se iz potpisa može videti <b>funkcija koja se prosleđuje funkciji `map` mora biti unarna</b> (primati jedan argument). Dakle, opšti potpis funkcije `map` je: `map unarna_funkcija lista_elemenata`.  
+Kao i u Pajtonu, i u programskom jeziku Haskel dostupna je ugrađena funkcija `map`. Njen potpis možemo dobiti pozivanjem `:i map` iz interpretera i on izgleda ovako: `map :: (a -> b) -> [a] -> [b]`. Pre prelaska na objašnjenje šta i kako funkcija `map` radi, potrebno je reći zbog čega uopšte postoje zagrade u zapisu. Setimo se da (ukoliko ovih zagrada ne bi bilo) bismo potpis funkcije tumačili kao "funkcija map prima argument tipa `a`, argument tipa `b`, listu elemenata tipa `a` i vraća listu elemenata tipa `b`".  No, zagrade menjaju značenje potpisa. Ukoliko sada izdvojimo samo segment u zagradama `(a -> b)` i posmatramo ga nezavisno od ostatka potpisa, možemo uočiti da se on sam za sebe može tumačiti kao funkcija i to kao funkcija koja prima argument tipa `a` i vraća rezultat tipa `b`. Dakle, <b>ukoliko se funkciji kao argument prosleđuje druga funkcija, to se radi tako što se potpis prosleđene funkcije piše u zagradama</b>. Takođe, kao što se iz potpisa može videti <b>funkcija koja se prosleđuje funkciji `map` mora biti unarna</b> (primati jedan argument). Dakle, opšti potpis funkcije `map` je: `map unarna_funkcija lista_elemenata`.  
 
 ## Kako radi funkcija `map`?
 
@@ -17,10 +17,10 @@ Tako, na primer, ukoliko bismo želeli da uvećamo sve elemente liste za 1, to b
  `koren lista = map sqrt lista`. 
 
 Naravno, funkciji `map` se ne moraju proslediti samo ugrađene funkcije, već je moguće proslediti i korisnički definisane funkcije. Na primer, ako bismo u prvom primeru želeli da mi napišemo svoju funkciju koja će da uvećava elemente i da nju kasnije prosledimo funkciji `map`, to bi se moglo uraditi na sledeći način:
- 
 
-    uvecaj1 n = n + 1
-    uvecaj lista = map uvecaj1 lista
+    `uvecaj1 n = n + 1`
+    `uvecaj lista = map uvecaj1 lista`
+
 # Filter
 
 Sledeća bitna funkcija je `filter`. Kao i u Pajtonu, <b>ona nam služi da iz liste elemenata izdvojimo samo one koji zadovoljavaju neki uslov</b>. Odgovarajući potpis je: `filter :: (a -> Bool) -> [a] -> [a]`. Dakle, i `filter` prima unarnu funkciju i listu elemenata tipa `a` i vraća kao povratnu vrednost listu elemenata tipa `a`. Međutim, unarna funkcija koja se prosleđuje funkciji `filter` mora biti <b>funkcija uslova</b>, tj. njena povratna vrednost mora biti tipa `Bool`. 
@@ -32,19 +32,19 @@ Funkcija `filter` radi tako što primeni dobijenu funkciju na svaki element list
 Ukoliko bismo želeli da izdvojimo sve pozitivne elemente iz liste, to bismo mogli da uradimo na sledeći način: 
 
     pozitivni lista = filter (>0) lista
-Ponovo, `(>0)` je unarna funkcija koja proverava da li je element liste veći od 0 (<b>pažnja: funkcija `>` nije komutativna, pa je veoma bitno da li stoji `>0` ili `0>` jer će ispravnsot rezultata zavisiti od toga kojim su redom navedeni operator i fiksirani argument</b>). Takođe, opet nismo morali da korsitimo ugrađenu funkciju, već je bilo moguće da koristimo neku koju smo mi prethodno definisali.
+Ponovo, `(>0)` je unarna funkcija koja proverava da li je element liste veći od 0 (<b>pažnja: funkcija `>` nije komutativna, pa je veoma bitno da li stoji `>0` ili `0>` jer će ispravnost rezultata zavisiti od toga kojim su redom navedeni operator i fiksirani argument</b>). Takođe, opet nismo morali da koristimo ugrađenu funkciju, već je bilo moguće da koristimo neku koju smo mi prethodno definisali.
 
 # Foldr
 
 Za razliku od funkcija `map i filter`, Pajtonska funkcija `reduce` nema svog jedinstvenog parnjaka u Haskelu. Funkcije koje odgovaraju datoj funkciji u Hakelu nazvane su `foldr` i `foldl`. 
 
-Krenimo za početak od funkcije `foldr`.  Njen potpsi izgleda ovako: 
+Krenimo za početak od funkcije `foldr`.  Njen potpis izgleda ovako: 
 `foldr :: (a -> b -> b) -> b -> t a -> b`. Dakle, `foldr` kao prvi argument dobija binarnu funkciju (sa argumentima tipa `a` i `b` i povratnom vrednošću tipa `b`), zatim argument tipa `b` (koji se naziva <b>akumulator</b>), te <b>kolekciju elementata tipa `a`</b> (označeno sa `t a` u potpisu) i vraća vrednost tipa `b`.  Ova funkcija enkapsulira sledeći šablon rekurzije:
 
-    f [] = v - f preslikava praznu listu u vrednost v `
+    `f [] = v - f preslikava praznu listu u vrednost v `
     `(v je najčešće prazna lista ili vrednost 0, ali u zavisnosti 
     od potrebe, može uzimati i druge vrednosti)`
- ` f (x:xs) = x op (f xs) - nepraznu listu preslikava u funkciju op primenjenu na glavu liste (x) i f od repa liste (f xs)`.
+    `f (x:xs) = x op (f xs) - nepraznu listu preslikava u funkciju op primenjenu na glavu liste (x) i f od repa liste (f xs)`.
 
 Na primer, ukoliko bismo želeli da izvršimo sabiranje svih elemenata liste korišćenjem funkcije `foldr` to bismo mogli da uradimo na sledeći način:
 
@@ -56,7 +56,7 @@ Demonstrirajmo sabiranje liste na konkretnom primeru. Neka je lista elemenata ko
 `saberi [1 : 2 : 3 : 4 : []] = 1 + (saberi [2 : 3 : 4 : []])`
 `saberi [2 : 3 : 4 : []] = 2 + (saberi [3 : 4 : []])`
 `saberi [3 : 4 : []] = 3 + (saberi [4 : []])`
-`saberi (4 : []) = 4 + saberi []`.  Ako bismo želeli da rezultat napišemo u jednom redu, rešenje bi izgledalo ovako: `saberi [1,2,3,4] = (1 + (2 + (3 + (4 + 0))))`. Dakle, yagrade se kod funkcije `foldr` <b>gomilaju na desnu stranu</b>.
+`saberi (4 : []) = 4 + saberi []`.  Ako bismo želeli da rezultat napišemo u jednom redu, rešenje bi izgledalo ovako: `saberi [1,2,3,4] = (1 + (2 + (3 + (4 + 0))))`. Dakle, zagrade se kod funkcije `foldr` <b>gomilaju na desnu stranu</b>.
 
 # Foldl
 Funkcija slična funkciji `foldr`, a koja takođe odgovara funkciji `reduce` iz Pajtona jeste funkcija `foldl`. Njen potpis (`foldl :: (b -> a -> b) -> b -> t a -> b`) je sličan kao i potpis funkcije `foldr`, ali ih ne treba mešati! `Foldl` enkapsulira sledeći šablon:
@@ -87,7 +87,7 @@ Prošle nedelje, pomenute su funkcije `take n lista` i `drop n lista` koje zadr�
 Ukoliko bismo želeli da izdvojimo najduži prefiks pozitivnih eleemnata iz neke liste, to možemo uraditi funkcijom `izdvojPrefiksPozitivnih lista = takeWhile (>0) lista`. Sa druge strane, ako bismo te pozitivne elemente želeli da odbacimo, to bi lako bilo moguće uraditi funkcijom `odbaciPrefiksPozitivnih lista = dropWhile (>0) lista`.
 
 # Any i all
-Ako bismo želeli da proverimo da li neki eleemnt liste zadovoljava neko svojstvo ili da li svi elementi liste zadovoljavaju neko svojstvo to možemo uraditi korišćenjem funkcija `any` i `all` respektivno. Ponovo, obe funkcije imaju isti potpis:
+Ako bismo želeli da proverimo da li neki element liste zadovoljava neko svojstvo ili da li svi elementi liste zadovoljavaju neko svojstvo to možemo uraditi korišćenjem funkcija `any` i `all` respektivno. Ponovo, obe funkcije imaju isti potpis:
 `any :: Foldable t => (a -> Bool) -> t a -> Bool`
 `all :: Foldable t => (a -> Bool) -> t a -> Bool`. Obe primaju funkciju uslova i kolekciju elemenata tipa `a` i vraćaju `Bool` koji govori da li neki/svi elementi zadovoljavaju prosleđeno svojstvo. Pritom, treba primetiti da `any` i `all` kao svoj argument primaju tipove koji su `Foldable`, tj. one tipove i strukture podataka koji se mogu svesti na jednu vrednost (ukoliko bismo dobili listu `Int` vrednosti, mogli bismo celu listu da preslikamo u jednu vrednost: bilo zbir liste, proizvod liste ili njenu dužinu). 
 

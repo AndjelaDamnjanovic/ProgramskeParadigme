@@ -9,7 +9,7 @@
 
 -- 2.1 Napisati funkciju main koja ispisuje poruku Zdravo! 
 {-
-    Kao sto je u uvodnom materijau napomenuto, ukoliko funkcija
+    Kao sto je u uvodnom materijalu napomenuto, ukoliko funkcija
     u svojoj definiciji ima samo jednu naredbu, pisemo je u jednom
     redu. Posto cemo imati definisanu main funkciju, kod je moguce
     kompajlirati komandom ghc 1.hs, pa nakon toga i izvrsiti dobijeni 
