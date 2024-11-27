@@ -45,11 +45,17 @@ Definišimo sada funkciju koja će računati obim trougla. Pošto  `Trougao` ima
 Opšta sintaksa za definisanje funkcija nad korisnički definisanim tipovima podataka je sledeća:
 
 `ime_funkcije (konstruktor1 params1) = rezultat1`
+
 `ime_funkcije (konstruktor2 params2) = rezultat2`
+
 `...`
+
 `ime_funkcije (konstruktorn paramsn) = rezultatn`.  Primenimo dati šablon na naš tip `Trougao` i našu funkciju `obim`:
+
 `obim (Jednakostranicni a) = 3 * a`
+
 `obim (Jednakokraki a b) = a + 2 * b`
+
 `obim (Raznostranicni a b c) = a + b + c`.  
 
 ### Rad sa korisnički definisanim tipovima
@@ -59,8 +65,10 @@ Prilikom rada sa novodefinisanim tipovima podataka treba obratiti pažnju na jed
 
  Greška se sastoji u tome što naš tip `Trougao` ne instancira tipski razred `Show` (tipski razred `Show` definiše kako se ispisuju svi ugrađeni tipovi podataka). Kako bi se premostio ovaj problem potrebno je (prilikom definisanja novog tipa) eksplicitno staviti do znanja interpreteru da je potrebno naš tip dodati u tipski razred `Show` kako bismo bili u mogućnosti da ga ispišemo. To se radi uz pomoć ključnih reči `deriving Show`. Dakle, odgovarajuća definicija tipa `Trougao` koja omogućava ispis instance datog tipa je:
 `data Trougao a b c = Jednakostranicni a`
-			&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	`| Jednakokraki a b`
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  `| Raznostranicni a b c deriving Show`. Ukoliko bismo sad pokušali da ispišemo pomenuti trougao, ne bismo imali problema.
+
+`| Jednakokraki a b`  
+
+`| Raznostranicni a b c deriving Show`. Ukoliko bismo sad pokušali da ispišemo pomenuti trougao, ne bismo imali problema.
 
 ![Ispis nakon dodavanja našeg tipa Trougao u tipski razred Show](../src/dobarIspisTrougao.png)
 
@@ -68,9 +76,12 @@ Međutim, postavlja se pitanje <b>zašto je ispis baš ovakav kakav jeste?</b>
 Odgovor na ovo pitanje vrlo je prost. Pomenuli smo da tipski razred `Show` definiše kako se ispisuju ugrađeni tipovi podataka. Primetimo sada da se svaki konstruktor našeg tipa `Trougao` zaista sastoji od ugrađenih tipova podataka: sam naziv konstruktora je `String`, pa se on tako i ispisuje. Tip podataka koji je prosleđen kao stranica može biti `Int/Float/Double`, ali svi su oni ugrađeni i `Show` već zna njihov ispis, te dodaje i njega.
 
 Naravno, ukoliko želimo i da poredimo trouglove na jednakost moguće je i to uraditi tako što naš tip `Trougao` ubacimo u tipski razred `Eq`. Ukoliko bismo želeli da pravimo poredak trouglova, mogli bismo ubaciti naš `Trougao` u tipski razred `Ord`. Tako bismo mogli da ubacimo naš tip u bilo koji od postojećih razreda. Međutim, ukoliko se naš tip ubacuje u više od jednog razreda, potrebno je listu svih razreda navesti u zagradama. Na primer, ukoliko bismo želeli da naš `Trougao` ubacimo u tipske razrede `Show, Eq i Ord`, to bismo uradili na sledeći način:
+
 `data Trougao a b c = Jednakostranicni a`
-			&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	`| Jednakokraki a b`
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  `| Raznostranicni a b c deriving (Show, Eq, Ord)`.
+
+`| Jednakokraki a b`
+
+`| Raznostranicni a b c deriving (Show, Eq, Ord)`.
 
 ### Mane korišćenja ugrađenih funkcija nad novim tipom  
 
@@ -87,33 +98,46 @@ Kako bi se izbegli ovi problemi, Haskel daje opciju <b>predefinisanja funkcija.<
 ### Konstruktor sa imenovanim parametrima
 
 Pre nego što se dotaknemo predefinisanja funkcija, potrebno je napomenuti da postoji još jedan način da se definiše nov tip podataka -- korišćenjem imenovanih parametara. Sintaksa ovakve definicije je:
+
 `data ime_tipa = ime_konstruktora {`
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ime_param1 :: tip1,`
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ime_param2 :: tip2`,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`...`
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ime_paramn :: tipn`
-`}`.  Pritom, ime tipa i ime konstruktora se mogu razlikovati, ali i ne moraju. Ukoliko bismo želeli da definišemo naš tip `Trougao` korišćenjem imenovanih parametara, to bismo uradili na sledeći način:
+
+`ime_param1 :: tip1,`
+
+`ime_param2 :: tip2`,
+
+`...`
+
+`ime_paramn :: tipn}`.  Pritom, ime tipa i ime konstruktora se mogu razlikovati, ali i ne moraju. Ukoliko bismo želeli da definišemo naš tip `Trougao` korišćenjem imenovanih parametara, to bismo uradili na sledeći način:
+
 `data Trougao = MojTrougao {`
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`a :: Float,`
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`b :: Float`,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`c :: Float`
-`}`.
+
+`a :: Float,`
+
+`b :: Float`,
+
+`c :: Float}`.
 
 ### Predefinisanje funkcija
 
 Ukoliko želimo da predefinišemo neku funkciju za naš tip tako da radi kako mi želimo, to možemo uraditi korišćenjem sledeće sintakse:
+
 `instance tipski_razred_iz_kog_predefinišemo_funkciju tip_koji_je_predefiniše where ime_funkcije_koja_se_predefiniše konstruktor = rezultat`. Na primer, ukoliko bismo želeli da trougao ispišemo kao uređenu trojku brojeva, to možemo uraditi na sledeći način: najpre je potrebno odrediti koju funkciju predefinišemo -- to je u našem slučaju `show`. Kom tipskom razredu ona pripada -- pripada razredu `Show`. Koji tip je predefiniše -- pa naš `Trougao` (definisan uz pomoć imenovanih parametara). Dakle, krajnji rezultat je:
 
 `instance Show Trougao where show (Trougao a b c) = `
+
 `"(" ++ show a ++ ", " ++ show b ++ ", " ++ show c ++ ")"`. 
 Na isti način bismo mogli da predefinišemo recimo funkciju koja proverava da li su 2 trougla jednaka (jer znamo da će ih porediti po parovima, pa će trougao sa stranicama 3, 4 i 5 i trougao sa stranicama 5, 4 i 3 biti označeni kao različiti):
+
 `instance Eq Trougao where`
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `(==) (Trougao a1 b1 c1) (Trougao a2 b2 c2) = ((sort [a1, b1, c1]) == (sort [a2, b2, c2]))`. Na isti način bismo mogli da predefinišemo funkcije `>` i `<` iz razreda `Ord`.
+
+ `(==) (Trougao a1 b1 c1) (Trougao a2 b2 c2) = ((sort [a1, b1, c1]) == (sort [a2, b2, c2]))`. Na isti način bismo mogli da predefinišemo funkcije `>` i `<` iz razreda `Ord`.
 
 ### Definisanje rekurzivnih tipova podataka
 
 Haskel takođe nudi podršku za definisanje rekurzivanih tipova podataka. Opšti šablon za definisanje ovakvih tipova je:
+
 `data ime_rekurzivnog_tipa [parametri] = konstruktor_za_bazni_slučaj | konstruktor_jednog_elementa [parametri] (ime_rekurzivnog_tipa [parametri])`.
 
 Na primer, ukoliko bismo želeli da definišemo tip `Lista`, to bismo mogli da uradimo na sledeći način:
+
 `data Lista a = Null | Konstanta a (Lista a) deriving Show`.
