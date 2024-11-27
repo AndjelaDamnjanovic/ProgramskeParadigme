@@ -10,19 +10,25 @@ Ukoliko bismo želeli da napravimo svoj tip `ParInt` koji će biti alijas za par
 `type ParInt = (Int, Int)`. Podsećanja radi, <b>imena tipova i tipskih razreda obavezno moraju početi velikim slovom!</b> Dalje možemo koristiti deklarisani tip kao što bismo koristili i običan par. Na primer, neka je potrebno definisati funkciju koja prima par celobrojnih vrednosti i vraća proizvod njegovih elemenata. 
 
 Najpre je potrebno odrediti potpis funkcije. Nakon što je alijas uveden, on se nalazi u dokumentaciji (vidi sliku ispod) i može se nesmetano koristiti. Dakle, potpis je sledeći: 
+
 `proizvod :: ParInt -> Int`. Definicija je jednostavna, kao i prilikom rada sa parovima:
+
 `proizvod (a, b) = a * b`. 
 
 ![Dokaz da je tip u dokumentaciji](../src/nasPar.png)
 
 Primetimo da prilikom deklaracije tipa nismo koristili nikakav parametar. To je zato što smo pravili alijas koji menja <b>tačno određeni tip podataka.</b> Što znači, ukoliko bismo želeli da napravimo par vrednosti istog tipa, ali bez ograničenja po pitanju tipa (moguće je napraviti par celobrojnih vrednosti, par realnih vrednosti, par listi i slično) korišćenje parametara bilo bi obavezno. Neka se ovaj tip zove `Par`. Njegova deklaracija izgledala bi ovako: 
 `type Par a = (a, a)`.  I ovako deklarisan tip možemo koristiti dalje u funkcijama, s tim što je u svakom potpisu funkcije pored tipa <b>neophodno navesti i tip parametra koji će biti prosleđen!</b> Ukoliko bismo opet želeli da definišemo `proizvod`, ali sada za tip `Par`, to bi se moglo učiniti na sledeći način:
+
 `proizvod' :: Par Int -> Int`. Definicija funkcije se ne bi promenila:
+
 `proizvod' (a, b) = a * b`
 
 <b>Napomena: svi</b> tipski parametri koji se nalaze sa desne strane <b>moraju</b> se naći i sa leve. Ukoliko bismo na primer želeli da dopustimo da elementi tipa `Par` budu proizvoljni (ne moraju biti istog tipa), onda bi odgovarajuća deklaracija glasila:
 `type Par a b = (a, b)`, pri čemu `a` i `b` mogu biti isti tipovi, a i ne moraju. Ponovo, prilikom deklaracije funkcije koja prima `Par` kao svoj argument neophodno je navesti sve tipove argumenata. Ponovo ćemo za primer uzeti  pomenutu funkciju `proizvod`:
+
 `proizvod :: Par Int Float -> Float`
+
 `proizvod (a, b) = (fromIntegral a) * b`. Podsetimo se, da bismo mogli da množimo vrednosti tipa `Int` sa vrednostima tipa `Float`, moramo najpre eksplicitno konvertovati `Int` u `Float` kao posledica <b>stroge tipiziranosti programskog jezika Haskel</b>.
 
 ## Definicija
@@ -32,14 +38,19 @@ Za razliku od deklaracije, <b>definisanje</b> tipa zaista pravi novi tip koji ne
 ![Primer definicije bulovskog tipa u Haskelu](../src/bulovskiTip.png) 
 
 Ukoliko bismo želeli da sami definišemo naš bulovski tip, to bismo mogli da uradimo na sledeći način: 
+
 `data BulovskiTip = Tacno | Netacno`.  Sada se nesmetano mogu praviti instance datog tipa.  Ovo je bio primer kada tip i njegovi konstruktori nemaju parametre.
 
 Sa druge strane, ukoliko bismo želeli da napravimo nov tip podataka `Trougao`, koji će omogućavati pravljenje jednakostraničnog, jednakokrakog i raznostraničnog trougla bez pretpostavki o tome kog će tipa biti veličine njegovih stranica, to ne možemo uraditi bez parametara. Primetimo takođe da nam je za pravljenje jednakostraničnog trougla dovoljna informacija o jednoj stranici, za jednakokraki trougao potrebne su nam dve stranice, a za raznostranični sve tri, što znači da će se i broj parametara svakog konstruktora razlikovati. Najzad, odgovarajuća definicija tipa je:
+
 `data Trougao a b c = Jednakostranicni a`
-			&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	`| Jednakokraki a b`
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  `| Raznostranicni a b c`.  Ponovo, svi parametri koji se nalaze na desnoj strani, moraju se naći i na levoj.
+
+`| Jednakokraki a b`
+
+`| Raznostranicni a b c`.  Ponovo, svi parametri koji se nalaze na desnoj strani, moraju se naći i na levoj.
 
 Definišimo sada funkciju koja će računati obim trougla. Pošto  `Trougao` ima svoje parametre, opet je neophodno navesti koji je tip parametara u pitanju prilikom definisanja funkcije koja će koristiti dati `Trougao`. Neka su stranice tipa `Float`. Tada potpis funkcije `obim` izgleda ovako:
+
 `obim :: Trougao Float Float Float -> Float`. Primetiti da su <b>tipovi parametara razdvojeni belinama.</b> Sada je još potrebno definisati kako se računa obim za tip `Trougao`. Pošto imamo različite vrste trouglova, potrebno je za svaku od njih ponaosob definisati način na koji se računa obim za nju. 
 
 Opšta sintaksa za definisanje funkcija nad korisnički definisanim tipovima podataka je sledeća:
