@@ -9,9 +9,11 @@ Pod <b>deklaracijom</b> tipa podrazumeva se pravljenje alijasa za već postojeć
 Ukoliko bismo želeli da napravimo svoj tip `ParInt` koji će biti alijas za par celobrojnih vrednosti, to radimo na sledeći način:
 `type ParInt = (Int, Int)`. Podsećanja radi, <b>imena tipova i tipskih razreda obavezno moraju početi velikim slovom!</b> Dalje možemo koristiti deklarisani tip kao što bismo koristili i običan par. Na primer, neka je potrebno definisati funkciju koja prima par celobrojnih vrednosti i vraća proizvod njegovih elemenata. 
 
-Najpre je potrebno odrediti potpis funkcije. Nakon što je alijas uveden, on se nalazi u dokumentaciji (ima screenshot) i može se nesmetano koristiti. Dakle, potpis je sledeći: 
+Najpre je potrebno odrediti potpis funkcije. Nakon što je alijas uveden, on se nalazi u dokumentaciji (vidi sliku ispod) i može se nesmetano koristiti. Dakle, potpis je sledeći: 
 `proizvod :: ParInt -> Int`. Definicija je jednostavna, kao i prilikom rada sa parovima:
 `proizvod (a, b) = a * b`. 
+
+![Dokaz da je tip u dokumentaciji](../src/nasPar.png)
 
 Primetimo da prilikom deklaracije tipa nismo koristili nikakav parametar. To je zato što smo pravili alijas koji menja <b>tačno određeni tip podataka.</b> Što znači, ukoliko bismo želeli da napravimo par vrednosti istog tipa, ali bez ograničenja po pitanju tipa (moguće je napraviti par celobrojnih vrednosti, par realnih vrednosti, par listi i slično) korišćenje parametara bilo bi obavezno. Neka se ovaj tip zove `Par`. Njegova deklaracija izgledala bi ovako: 
 `type Par a = (a, a)`.  I ovako deklarisan tip možemo koristiti dalje u funkcijama, s tim što je u svakom potpisu funkcije pored tipa <b>neophodno navesti i tip parametra koji će biti prosleđen!</b> Ukoliko bismo opet želeli da definišemo `proizvod`, ali sada za tip `Par`, to bi se moglo učiniti na sledeći način:
@@ -26,7 +28,8 @@ Primetimo da prilikom deklaracije tipa nismo koristili nikakav parametar. To je 
 ## Definicija
 Za razliku od deklaracije, <b>definisanje</b> tipa zaista pravi novi tip koji ne postoji. Nov tip se može definisati sledećom sintaksom:
 
-`data ime_tipa [param] = konstruktor1 [param1] | konstruktor2 [param2] | ... | konstruktorn [paramn]`, pri čemu konstruktori ne moraju imati parametre, ali ako ih imaju ne mora svaki konstruktor imati isti broj parametara. Takođe, kao i tipovi i tipski razredi, i imena konstruktora moraju počinjati velikim slovom i ne smeju biti isti kao neka ključna reč u Haskelu. Svi tipovi u Haskelu definisani su upravo korišćenjem ove sintakse. (opet ima screenshot). 
+`data ime_tipa [param] = konstruktor1 [param1] | konstruktor2 [param2] | ... | konstruktorn [paramn]`, pri čemu konstruktori ne moraju imati parametre, ali ako ih imaju ne mora svaki konstruktor imati isti broj parametara. Takođe, kao i tipovi i tipski razredi, i imena konstruktora moraju počinjati velikim slovom i ne smeju biti isti kao neka ključna reč u Haskelu. Svi tipovi u Haskelu definisani su upravo korišćenjem ove sintakse: 
+![Primer definicije bulovskog tipa u Haskelu](../src/bulovskiTip.png) 
 
 Ukoliko bismo želeli da sami definišemo naš bulovski tip, to bismo mogli da uradimo na sledeći način: 
 `data BulovskiTip = Tacno | Netacno`.  Sada se nesmetano mogu praviti instance datog tipa.  Ovo je bio primer kada tip i njegovi konstruktori nemaju parametre.
@@ -51,10 +54,15 @@ Opšta sintaksa za definisanje funkcija nad korisnički definisanim tipovima pod
 
 ### Rad sa korisnički definisanim tipovima
 
-Prilikom rada sa novodefinisanim tipovima podataka treba obratiti pažnju na jednu bitnu manu -- ne postoji podrška za rad sa tim tipovim osim onog što mi definišemo. Zaista, ako bismo napravili jednu instancu jednakostraničnog trougla i pokušali da je ispišemo videli bismo da će nam interpreter vratiti grešku (screenshot). Greška se sastoji u tome što naš tip `Trougao` ne instancira tipski razred `Show` (tipski razred `Show` definiše kako se ispisuju svi ugrađeni tipovi podataka). Kako bi se premostio ovaj problem potrebno je (prilikom definisanja novog tipa) eksplicitno staviti do znanja interpreteru da je potrebno naš tip dodati u tipski razred `Show` kako bismo bili u mogućnosti da ga ispišemo. To se radi uz pomoć ključnih reči `deriving Show`. Dakle, odgovarajuća definicija tipa `Trougao` koja omogućava ispis instance datog tipa je:
+Prilikom rada sa novodefinisanim tipovima podataka treba obratiti pažnju na jednu bitnu manu -- ne postoji podrška za rad sa tim tipovim osim onog što mi definišemo. Zaista, ako bismo napravili jednu instancu jednakostraničnog trougla i pokušali da je ispišemo videli bismo da će nam interpreter vratiti sledeću grešku:
+![Greška prilikom ispisa trougla](../src/showGreska.png)
+
+ Greška se sastoji u tome što naš tip `Trougao` ne instancira tipski razred `Show` (tipski razred `Show` definiše kako se ispisuju svi ugrađeni tipovi podataka). Kako bi se premostio ovaj problem potrebno je (prilikom definisanja novog tipa) eksplicitno staviti do znanja interpreteru da je potrebno naš tip dodati u tipski razred `Show` kako bismo bili u mogućnosti da ga ispišemo. To se radi uz pomoć ključnih reči `deriving Show`. Dakle, odgovarajuća definicija tipa `Trougao` koja omogućava ispis instance datog tipa je:
 `data Trougao a b c = Jednakostranicni a`
 			&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	`| Jednakokraki a b`
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  `| Raznostranicni a b c deriving Show`. Ukoliko bismo sad pokušali da ispišemo pomenuti trougao, ne bismo imali problema (screenshot).
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  `| Raznostranicni a b c deriving Show`. Ukoliko bismo sad pokušali da ispišemo pomenuti trougao, ne bismo imali problema.
+
+![Ispis nakon dodavanja našeg tipa Trougao u tipski razred Show](../src/dobarIspisTrougao.png)
 
 Međutim, postavlja se pitanje <b>zašto je ispis baš ovakav kakav jeste?</b> 
 Odgovor na ovo pitanje vrlo je prost. Pomenuli smo da tipski razred `Show` definiše kako se ispisuju ugrađeni tipovi podataka. Primetimo sada da se svaki konstruktor našeg tipa `Trougao` zaista sastoji od ugrađenih tipova podataka: sam naziv konstruktora je `String`, pa se on tako i ispisuje. Tip podataka koji je prosleđen kao stranica može biti `Int/Float/Double`, ali svi su oni ugrađeni i `Show` već zna njihov ispis, te dodaje i njega.
@@ -66,7 +74,10 @@ Naravno, ukoliko želimo i da poredimo trouglove na jednakost moguće je i to ur
 
 ### Mane korišćenja ugrađenih funkcija nad novim tipom  
 
-Iako je sada sve naizgled u redu, ipak treba imati na umu da smo definisali novi tip podataka i da uvek treba prvo ispitati kako će se ugrađene funkcije ponašati sa do sada nepoznatim konstruktorima. Na primer, jednakostranični trougao stranice 3 i raznostranični trougao sa stranicama 3, 3, 3 su, u stvari, jedan te isti trougao. No, ukoliko napravimo takva dva trougla u Haskelu i pitamo da li su jednaki, odgovor će biti -- ne! (screenshot) Sada se, logično, nameće pitanje zašto je to tako.
+Iako je sada sve naizgled u redu, ipak treba imati na umu da smo definisali novi tip podataka i da uvek treba prvo ispitati kako će se ugrađene funkcije ponašati sa do sada nepoznatim konstruktorima. Na primer, jednakostranični trougao stranice 3 i raznostranični trougao sa stranicama 3, 3, 3 su, u stvari, jedan te isti trougao. No, ukoliko napravimo takva dva trougla u Haskelu i pitamo da li su jednaki, odgovor će biti -- ne! 
+
+![Primer greške prilikom poređenja trouglova](../src/losePoredjenje.png)
+ Sada se, logično, nameće pitanje zašto je to tako.
 
  Odgovor leži u činjenici da nov tip može imati više različitih konstruktora, a pošto nijedan od njih nije ugrađen, jezik ne zna kako da ih međusobno poredi. Poređenje instanci koje su napravljene istim konstruktorom vrši se tako što se redom porede vrednosti argumenata koje su prosleđene konstruktoru. Ukoliko su prvi argumenti jednaki, prelazi se na drugi, pa ako su i oni jednaki na treći i tako dalje. Na osnovu vrednosti argumenata određuje se da li je prva instanca veća, jednaka ili manja od druge. No, primetimo da <b>ni ovakvo poređenje ne daje uvek dobar rezultat</b> (uzmimo za primer pravougaonik sa stranicama 3 i 4 i drugi pravougaonik sa stranicama 4 i 3. Naravno, ovo je jedan isti pravougaonik, ali će program, poredeći redom argumente konstruktora, zaključiti da je prvi pravougaonik manji od drugog).
 Sa druge strane, ukoliko poredimo različite instance dobijene različitim konstruktorima, <b>uvek je manja ona instanca čiji je konstruktor prilikom definicije tipa naveden ranije.</b>
