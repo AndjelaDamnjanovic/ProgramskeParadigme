@@ -34,8 +34,8 @@ Primetimo da prilikom deklaracije tipa nismo koristili nikakav parametar. To je 
 ## Definicija
 Za razliku od deklaracije, <b>definisanje</b> tipa zaista pravi novi tip koji ne postoji. Nov tip se može definisati sledećom sintaksom:
 
-`data ime_tipa [param] = konstruktor1 [param1] | konstruktor2 [param2] | ... | konstruktorn [paramn]`, pri čemu konstruktori ne moraju imati parametre, ali ako ih imaju ne mora svaki konstruktor imati isti broj parametara. Takođe, kao i tipovi i tipski razredi, i imena konstruktora moraju počinjati velikim slovom i ne smeju biti isti kao neka ključna reč u Haskelu. Svi tipovi u Haskelu definisani su upravo korišćenjem ove sintakse: 
-![Primer definicije bulovskog tipa u Haskelu](../src/bulovskiTip.png) 
+`data ime_tipa [param] = konstruktor1 [param1] | konstruktor2 [param2] | ... | konstruktorn [paramn]`, pri čemu konstruktori ne moraju imati parametre, ali ako ih imaju ne mora svaki konstruktor imati isti broj parametara. Takođe, kao i tipovi i tipski razredi, i imena konstruktora moraju počinjati velikim slovom i ne smeju biti isti kao neka ključna reč u Haskelu. Svi tipovi u Haskelu definisani su upravo korišćenjem ove sintakse:  <br>
+![Primer definicije bulovskog tipa u Haskelu](../src/tipBool.png) 
 
 Ukoliko bismo želeli da sami definišemo naš bulovski tip, to bismo mogli da uradimo na sledeći način: 
 

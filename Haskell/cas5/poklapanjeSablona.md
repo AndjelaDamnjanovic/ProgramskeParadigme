@@ -27,7 +27,7 @@ Znajući ovo, možemo uprostiti kod:
 
 Primetimo da drugi šablon u svojoj definiciji može poklopiti i par vrednosti `True True`. No, i uprkos tome, do tog poklapanja <b>nikad neće doći</b> jer, kao što je već pomenuto, interpreter šablone poklapa <b>redom</b>. Dakle, par `True True` će se uvek poklopiti sa prvim šablonom, te stoga naša funkcija radi baš ono što treba.
 
-Da smo kojim slučajem, obrnuli mesta šablonima, tj. ako bi funkcija bila definisana na sledeći način:
+Da smo kojim slučajem, obrnuli mesta šablonima, tj. ako bi funkcija bila definisana na sledeći način:  <br>
   `myAnd :: Bool -> Bool -> Bool` <br>
   `myAnd _ _ = False` <br>
  `myAnd True True = True`, onda bi se prosleđeni par `True True` najpre poklopio sa prvim šablonom i <b>došlo bi do greške!</b> Zato je šablone sa džokerima potrebno navoditi na kraju.
