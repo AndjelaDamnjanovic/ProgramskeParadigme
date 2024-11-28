@@ -14,7 +14,7 @@
     `lista3 = [1, 3..9]`
  - u Haskell-u je moguće definisati i beskonačnu listu tako što se samo navede prvi element (ili prva dva elementa ako hoćemo beskonačnu listu elemenata sa određenim korakom)
 
-	`lista4 = [1..]`
+	`lista4 = [1..]` <br>
 	`lista5 = [1, 5..]`
 - moguće je napraviti i listu elemenata u opadajućem poretku ukoliko postoji korak na osnovu kog Haskell može da zaključi šablon po kom se dodaju elementi liste
 
@@ -24,10 +24,10 @@
 
 Do sada smo videli samo liste celih brojeva, ali liste mogu sadržati i druge tipove podataka: Double, String, Char, torke, druge liste...
 
-`listaDouble = [1.2, 3.4, 5.6]`
-    `listaString = ["Ovo", "je", "lista", "stringova"]`
-    `listaTorke = [(1,3.5, "str"), (2, 7.4, "neki string")]`
-    `listaListi = [["lista", "stringova"], ["druga", "lista"], []]`
+`listaDouble = [1.2, 3.4, 5.6]` <br>
+    `listaString = ["Ovo", "je", "lista", "stringova"]`<br>
+    `listaTorke = [(1,3.5, "str"), (2, 7.4, "neki string")]`<br>
+    `listaListi = [["lista", "stringova"], ["druga", "lista"], []]`<br>
     `listaChar = ['L', 'i', 's', 't', 'a']`
 
 <b>Napomena:</b> Ukoliko nakon kreiranja liste karaktera ukucamo `listaChar` u terminalu, kao rezultat dobićemo jedan string - "Lista". 
@@ -37,9 +37,9 @@ Do sada smo videli samo liste celih brojeva, ali liste mogu sadržati i druge ti
 
 Neke od najbitnijih funkcija koje olakšavaju rad sa  listama <b>proizvoljnog tipa </b> su:
 
-- konkatenacija (operator ++): 
-`lista = [1..5]`
-`lista2 = [6..10]`
+- konkatenacija (operator ++): <br>
+`lista = [1..5]` <br>
+`lista2 = [6..10]` <br>
 `lista ++ lista2`
 - dodavanje elementa na početak liste (operator :): `1:[2..10]`
 - indeksni pristup (operator !!): `[1..10] !! 5`

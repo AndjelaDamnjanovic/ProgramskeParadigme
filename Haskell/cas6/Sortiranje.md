@@ -9,13 +9,13 @@ Sa druge strane, ukoliko želimo da listu sortiramo opadajuće primetićemo da n
 Ukoliko bismo, dakle, hteli da sortiramo niz brojeva opadajuće uz pomoć funkcije `compare`, to bismo mogli uraditi na sledeći način:
 `sort (flip compare) [1, 2, -4, 5]`.
 
-Međutim, ukoliko treba porediti neke komplikovanije tipove podataka (npr. poređenje korisnički definisanih tipova podataka), često nije moguće koristiti ugrađenu funkciju `compare`. Samim tim, standardna funkcija `sort` je u tom slučaju beskorisna. No, Haskel nudi i mogućnost korišćenja funkcije `sortBy :: (a -> a -> Ordering) -> [a] -> [a]
+Međutim, ukoliko treba porediti neke komplikovanije tipove podataka (npr. poređenje korisnički definisanih tipova podataka), često nije moguće koristiti ugrađenu funkciju `compare`. Samim tim, standardna funkcija `sort` je u tom slučaju beskorisna. No, Haskel nudi i mogućnost korišćenja funkcije <br> `sortBy :: (a -> a -> Ordering) -> [a] -> [a]
 ` koja kao svoj prvi argument prima funkciju poređenja koju korisnik definiše. Uz to, ova funkcija prima i listu elemenata koju treba sortirati i vraća listu sortiranih elemenata. Primetimo da, ukoliko želimo da sortiramo elemente opadajuće, sada nema potrebe da pribegavamo trikovima, dovoljno je samo definisati funkciju za poređenje na odgovarajući način.
 
-Pokušajmo da sortiramo listu parova rastuće po drugom elementu para korišćenjem funkcije `sortBy`. Najpre je potrebno definisati odgovarajuću funkciju koja će da vrši poređenje elemenata:
+Pokušajmo da sortiramo listu parova rastuće po drugom elementu para korišćenjem funkcije `sortBy`. Najpre je potrebno definisati odgovarajuću funkciju koja će da vrši poređenje elemenata: <br>
 `poredi a b = compare (snd a) (snd b)`. 
-Alternativno, mogli smo da izbegnemo korišćenje funkcije `snd` tako što bismo parove zamenili njihovim šablonima:
-`poredi' (p, q) (r, s) = compare q s`. Sada je samo potrebno pozvati funkciju za sortiranje: 
+Alternativno, mogli smo da izbegnemo korišćenje funkcije `snd` tako što bismo parove zamenili njihovim šablonima: <br>
+`poredi' (p, q) (r, s) = compare q s`. Sada je samo potrebno pozvati funkciju za sortiranje: <br>
 `sortParDrugiRastuce lst = sortBy poredi lst`. Funkcija bi radila isto da je `poredi` zamenjeno sa `poredi'`.
 
 I, na kraju, još jedna ugrađena funkcija za sortiranje je funkcija `sortOn :: Ord b => (a -> b) -> [a] -> [a]` koja kao svoj prvi argument prima ključ po kome treba sortirati listu, a zatim i listu elemenata koju je potrebno sortirati, te vraća listu čiji su elementi uređeni u željenom poretku. Ona takođe koristi funkciju `compare` kako bi poredila dva elementa liste.

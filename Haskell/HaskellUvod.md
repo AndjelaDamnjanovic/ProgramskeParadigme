@@ -28,10 +28,12 @@ Ako se telo funkcije sastoji od samo jedne naredbe, tu naredbu pišemo u nastavk
 
 Na primer, ako samo želimo da ispišemo "Hello world" na izlaz, možem definisati funkciju `ispisiPozdrav = print "Hello world"`. Pošto ta funkcija nema argumenata, vidimo da odmah nakon imena funkcije ide njena definicija. 
 
-Ukoliko bismo, pak, hteli da na standardni izlaz ispišemo više teksta koji se nalazi u više linija koda, to radimo na sledeći način: 
- `ispisiPozdrav = do`
-       &nbsp;&nbsp;&nbsp;&nbsp;  `print "Hello world" `
-       &nbsp;&nbsp;&nbsp;&nbsp;  `print "!". ` Pritom treba napomenuti da je Haskell veoma strog jezik što se tiče indentacije (stroži čak i od Pajtona), pa svaka linija na istom nivou indentacije mora biti jednako indentovana. 
+Ukoliko bismo, pak, hteli da na standardni izlaz ispišemo više teksta koji se nalazi u više linija koda, to radimo na sledeći način: <br>
+
+      ispisiPozdrav = do
+            print "Hello world"
+            print "!".  
+Pritom treba napomenuti da je Haskell veoma strog jezik što se tiče indentacije (stroži čak i od Pajtona), pa svaka linija na istom nivou indentacije mora biti jednako indentovana. 
 
 <b>Napomena:</b> Haskell dozvoljava da se u nazivu funkcije nađu mala slova, velika slova, brojevi, specijalni karakteri, pa čak i da se naziv funkcije sastoji samo od specijalnih karaktera. Jedino ograničenje je da <b>prilikom imenovanja funkcija nije dozvoljeno da funkcija počne velikim slovom</b>. Takođe, ukoliko se ime funkcije sastoji samo od specijalnih karaktera, na primer `&&`, onda je obavezno da se njeno ime prilikom definicije, deklaracije i korišćenja stavi unutar običnih zagrada da bi interpreter/kompajler znao da se radi o funkciji (u ovom slučaju, odgovarajuća sintaksa bila bi `(&&)`). 
     

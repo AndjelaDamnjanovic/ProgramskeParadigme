@@ -3,8 +3,8 @@
 Poklapanje šablona (eng. <b>pattern matching</b>) je način na koji se veliki broj ugrađenih funkcija definiše za različite tipove/tipske razrede.
 Na primer, ukoliko bismo želeli da definišemo jednostavnu bulovsku operaciju `not`, to bismo mogli da uradimo preko dva šablona: mi zadajemo definicije funkcije gde za argumente koristimo neku vrstu šablona, tj. zadajemo konkretne kombinacije na ulazu za koje znamo kako je definisan izlaz. Dakle, znamo da ako funkcija primi vrednost `True`, ona treba da kao rezultat vrati `False` i obratno. Sada je potrebno samo implementirati funkciju preko šablona, što se radi na sledeći način:
 
-`myNot :: Bool -> Bool`
-`myNot True = False`
+`myNot :: Bool -> Bool` <br>
+`myNot True = False` <br>
 `myNot False = True`
 
 <b>Kako funkcioniše poklapanje šablona nakon definisanja funkcije?</b>
@@ -14,27 +14,31 @@ Dakle, ukoliko bismo ovako definisanu funkciju pozvali u interpreteru komandom `
 
 Neka je sada zadatak definisati funkciju koja odgovara konjukciji preko šablona. Znamo da postoji 4 moguća slučaja:
 
-`True && True = True`
-`True && False = False`
-`False && True = False`
+`True && True = True` <br>
+`True && False = False` <br>
+`False && True = False` <br>
 `False && False = False`.  Kada bismo ovako definisali našu funkciju ne bismo pogrešili. Ali, ako malo bolje pogledamo, vidimo da je prvi slučaj jedini koji vraća `True`, dok svi ostali vraćaju `False`, pa se pitamo da li je moguće nekako sažeti ovaj zapis. Odgovor je da. Haskell daje opciju korišćenja <b>džokera</b> (takođe se koristi i naziv <b>wildcard</b>), koji se zapisuje kao donja crta (`_`).  On predstavlja opšti slučaj (kao što je na primer `otherwise` u ograđenim jednačinama) i stoga se treba naći kao poslednji definisani šablon. Džoker označava da se na njegovom mestu može naći <b>bilo koja vrednost</b>. Takođe, treba napomenuti da se džokeri mogu naći <b>samo sa leve strane jednakosti</b>. Ako više džokera ulaze u sastav istog šablona, oni su <b>međusobno nezavisni</b>, tj. jedan džoker se može poklopiti sa vrednošću `True`, dok se istovremeno drugi može poklopiti s vrednošću `False`.
 
 Znajući ovo, možemo uprostiti kod:
 
-`myAnd :: Bool -> Bool -> Bool`
-`myAnd True True = True`
-`myAnd _ _ = False`.  Primetimo da drugi šablon u svojoj definiciji može poklopiti i par vrednosti `True True`. No, i uprkos tome, do tog poklapanja <b>nikad neće doći</b> jer, kao što je već pomenuto, interpreter šablone poklapa <b>redom</b>. Dakle, par `True True` će se uvek poklopiti sa prvim šablonom, te stoga naša funkcija radi baš ono što treba.
+`myAnd :: Bool -> Bool -> Bool`<br>
+`myAnd True True = True`<br>
+`myAnd _ _ = False`.  
+
+Primetimo da drugi šablon u svojoj definiciji može poklopiti i par vrednosti `True True`. No, i uprkos tome, do tog poklapanja <b>nikad neće doći</b> jer, kao što je već pomenuto, interpreter šablone poklapa <b>redom</b>. Dakle, par `True True` će se uvek poklopiti sa prvim šablonom, te stoga naša funkcija radi baš ono što treba.
 
 Da smo kojim slučajem, obrnuli mesta šablonima, tj. ako bi funkcija bila definisana na sledeći način:
-  `myAnd :: Bool -> Bool -> Bool`
-  `myAnd _ _ = False`
+  `myAnd :: Bool -> Bool -> Bool` <br>
+  `myAnd _ _ = False` <br>
  `myAnd True True = True`, onda bi se prosleđeni par `True True` najpre poklopio sa prvim šablonom i <b>došlo bi do greške!</b> Zato je šablone sa džokerima potrebno navoditi na kraju.
 
 Međutim, ukoliko ne želimo da se šabloni preklapaju i tako izbegnemo probleme, možemo pomenutu funkciju definisati i na sledeći način:
 
-`myAnd :: Bool -> Bool -> Bool`
-`myAnd True x = x`
-`myAnd False _ = False`. To znači da ukoliko nam korisnik prosledi vrednosti `True` i nešto drugo, uvek ćemo vratiti upravo to nešto drugo (što ima smisla jer par `True True` vraća `True`, a par `True False` vraća `False`). Sa druge strane, ako je prva vrednost `False` vraćamo `False` bez obzira na to šta se nalazi kao drugi element para. 
+`myAnd :: Bool -> Bool -> Bool` <br>
+`myAnd True x = x` <br>
+`myAnd False _ = False`. 
+
+To znači da ukoliko nam korisnik prosledi vrednosti `True` i nešto drugo, uvek ćemo vratiti upravo to nešto drugo (što ima smisla jer par `True True` vraća `True`, a par `True False` vraća `False`). Sa druge strane, ako je prva vrednost `False` vraćamo `False` bez obzira na to šta se nalazi kao drugi element para. 
 
 # Šabloni liste
 
