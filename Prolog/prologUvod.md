@@ -36,7 +36,9 @@ Takođe je potrebno napomenuti da Prolog radi pod pretpostavkom <b>zatvorenog sv
 
 Nakon dodavanja u putanju, moguće je pokrenuti interpreter iz terminala. To se radi komandom `bprolog`. Nakon zadate komande, pojavlje se sledeći tekst: ![Primer izlaza interpretera](src/prologInterpreter.png).
 
- Kako bismo se bolje upoznali sa mogućnostima koje nudi programski jezik Prolog, možemo u terminalu ukucati `help` (ako se prisetimo dosadašnje priče, iz terminala se zadaju upiti, pa to čini `help` takođe upitom). Izlazi nam sledeća lista ugrađenih funkcija: ![Lista Prolog upita](src/prologQueryList.png).
+ Kako bismo se bolje upoznali sa mogućnostima koje nudi programski jezik Prolog, možemo u terminalu ukucati `help` (ako se prisetimo dosadašnje priče, iz terminala se zadaju upiti, pa to čini `help` takođe upitom). Izlazi nam sledeća lista ugrađenih funkcija: 
+ 
+ ![Lista Prolog upita](src/prologQueryList.png).
 
 Vidimo da se na datoj listi nalazi mali broj mogućih upita, ali to je zato što Prolog ima mali broj ugrađenih funkcija. Kako bismo preveli program, možemo pozvati funkciju `compile(ime_fajla)` koja će prevesti prosleđeni izvorni kod u izvršni. Kako bismo dalje učitali tako dobijen izvršni kod, postoji funkcija `load(ime_fajla)` koja baš to radi. Sada je naš izvršni fajl učitan i interpreteru se mogu postavljati upiti.
 
