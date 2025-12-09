@@ -26,7 +26,7 @@ Kao što je navedeno, u Haskell-u su funkcije građani prvog reda i sve se defin
 
 Ako se telo funkcije sastoji od samo jedne naredbe, tu naredbu pišemo u nastavku jednakosti. Sa druge strane, ukoliko telo funkcije koju definišemo ima više linija koda, onda je najpre potrebno (iza znaka jednakosti, a pre defiisanja tela funkcije) navesti  ključnu reč `do`, pa tek onda navoditi kod koji će se izvršiti u telu funkcije.
 
-Na primer, ako samo želimo da ispišemo "Hello world" na izlaz, možem definisati funkciju `ispisiPozdrav = print "Hello world"`. Pošto ta funkcija nema argumenata, vidimo da odmah nakon imena funkcije ide njena definicija. 
+Na primer, ako samo želimo da ispišemo "Hello world" na izlaz, možemo definisati funkciju `ispisiPozdrav = print "Hello world"`. Pošto ta funkcija nema argumenata, vidimo da odmah nakon imena funkcije ide njena definicija. 
 
 Ukoliko bismo, pak, hteli da na standardni izlaz ispišemo više teksta koji se nalazi u više linija koda, to radimo na sledeći način: <br>
 
