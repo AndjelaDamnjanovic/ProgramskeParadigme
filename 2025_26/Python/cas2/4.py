@@ -7,7 +7,7 @@ def aritm_sredina(*args):
 
     return suma / br
 
-def aritm_sredina2(*args):id(x)
+def aritm_sredina2(*args):
     return sum(args) / len(args)
 
 print(aritm_sredina2(1,2,3,4,5))
