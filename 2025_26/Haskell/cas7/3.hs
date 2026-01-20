@@ -1,0 +1,1 @@
+data MojBul = Tacno | Netacno deriving Show
