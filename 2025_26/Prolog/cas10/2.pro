@@ -1,0 +1,11 @@
+novcici(Vars) :- Vars = [A, B, C, D, E],
+    A in 1..13,
+    B in 1..7,
+    C in [1,2,3],
+    D in [1,2],
+    E in [1],
+    A + 2 * B + 5 * C + 10 * D + 20 * E #= 50,
+    labeling(Vars), 
+    write(A), write(' * 1 + '), write(B), write(' * 2 + '), write(C), write(' * 5 + '),
+    write(D), write(' * 10 + '), write(E), write(' * 20'), nl,
+    fail.

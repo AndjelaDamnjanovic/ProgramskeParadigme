@@ -1,0 +1,11 @@
+suma :- Vars = [T, W, O, F, U, R],
+    [T, F] in 1..9,
+    [W, O, U, R] in 0..9,
+    alldifferent(Vars),
+    2 * (T * 100 + W * 10 + O) #= F * 1000 + 100 * O + 10 * U + R,
+    labeling(Vars),
+    write(' '), write(T), write(W), write(O), nl,
+    write('+'), write(T), write(W), write(O), nl,
+    write('-------'), nl,
+    write(F), write(O), write(U), write(R), nl,
+    write('##########'), nl, fail.
